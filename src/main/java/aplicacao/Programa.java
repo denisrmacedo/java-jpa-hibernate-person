@@ -13,10 +13,13 @@ public class Programa {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
 		EntityManager em = emf.createEntityManager();
 		
-		// Buscar uma pessoa no banco de dados
-		Pessoa p = em.find(Pessoa.class, 10);
+		// Deletar uma pessoa no banco de dados
+		Pessoa p = em.find(Pessoa.class,10);
 		
-		System.out.println(p);
+		em.getTransaction().begin();
+		em.remove(p);
+		em.getTransaction().commit();
+		
 		
 		System.out.println("Pronto!");
 		em.close();
